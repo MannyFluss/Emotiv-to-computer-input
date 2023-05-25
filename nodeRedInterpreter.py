@@ -3,12 +3,12 @@ import time
 import re
 
 class constants:
-    myPath = "C:/Users/manny/Desktop/job4dom/Emotiv-to-computer-input/output.txt"
+    
     pollRate = .1
     killSwitch = '/'
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 command_to_key = {
-"neutral" : "a",
+"neutral" : "",
 "push" : "b",
 "pull" : "c",
 "lift" : "d",
@@ -27,6 +27,9 @@ last_key_pressed = ""
 curr_key_pressed = ""
 
 def main():
+    myPath = "" 
+    with open('myPathInfo.txt', 'r') as file:
+        myPath = file.read()
     global curr_key_pressed
     global last_key_pressed
     while(True):
@@ -35,8 +38,7 @@ def main():
                 keyboard.press(curr_key_pressed)
             if last_key_pressed != "":
                 keyboard.release(last_key_pressed)
-            
-    
+        
 
         if keyboard.is_pressed(constants.killSwitch):
             break
@@ -57,7 +59,6 @@ def pollInput(_line : str):
     matches = re.findall(pattern,_line)
     thoughtToKeyPress(matches[0][0])
     
-
 def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
