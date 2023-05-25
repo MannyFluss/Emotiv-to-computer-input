@@ -3,7 +3,7 @@ import time
 import re
 
 class constants:
-    myPath = "C:/Users/manny/Desktop/work4Dom/output.txt"
+    myPath = "C:/Users/manny/Desktop/job4dom/Emotiv-to-computer-input/output.txt"
     pollRate = .1
     killSwitch = '/'
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
@@ -31,10 +31,10 @@ def main():
             break
         with open(constants.myPath, "r", encoding='utf-16') as f:
             lines = f.readlines()
-            pollInput(lines[-1])
-            if len(lines) == 0:
+            if (lines == []):
                 time.sleep(constants.pollRate)
-                continue
+                continue        
+            pollInput(lines[-1])
         time.sleep(constants.pollRate)
 
 def pollInput(_line : str):
