@@ -1,0 +1,12 @@
+[
+    {
+        "id": "031a4d24b655607a",
+        "type": "comment",
+        "z": "43d30511a4e8ba99",
+        "name": "How to use",
+        "info": "By default, this program will not work, you\nhave to press the enable button in order to enable this program\nafter a 5 second delay you will then be able to think to keyboard presses\nthe reason there is a delay is because you really want to be on the right\ntab before you start sending commands to the keyboard\n",
+        "x": 220,
+        "y": 320,
+        "wires": []
+    }
+]
