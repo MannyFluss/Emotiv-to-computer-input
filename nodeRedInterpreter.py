@@ -32,6 +32,9 @@ def main():
         with open(constants.myPath, "r", encoding='utf-16') as f:
             lines = f.readlines()
             pollInput(lines[-1])
+            if len(lines) == 0:
+                time.sleep(constants.pollRate)
+                continue
         time.sleep(constants.pollRate)
 
 def pollInput(_line : str):
