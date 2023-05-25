@@ -9,6 +9,7 @@ requirements:
 
     -python3 https://www.python.org/downloads/ 
     -pip install keyboard
+    -pip install pynput
     -download and install [node-red] (https://nodered.org/docs/getting-started/local)
     -download and install the [emotiv launcher](https://flows.nodered.org/node/node-red-contrib-emotiv-bci) and its [node red components](https://www.emotiv.com/emotiv-launcher/)
 
