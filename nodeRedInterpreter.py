@@ -1,31 +1,33 @@
 import keyboard
 import time
 import re
+from pynput.mouse import Button, Controller
 
 class constants:
     
     pollRate = .1
     killSwitch = '/'
+    mouseSensitivityMult = 1
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 command_to_key = {
-"neutral" : "",
-"push" : "b",
-"pull" : "c",
-"lift" : "d",
-"drop" : "e",
-"left" : "f",
-"right" : "g",
-"rotateRight" : "h",
-"rotateLeft" : "i",
-"rotateCounterClockwise" : "j",
-"rotateClockwise" : "k",
-"rotateReverse" : "l",
-"rotateForwards" : "m",
-"disappear" : "n",
+"neutral" : {"input":"","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"push" : {"input":"b","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"drop" : {"input":"e","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"left" : {"input":"f","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"right" : {"input":"g","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateRight" : {"input":"h","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateLeft" : {"input":"i","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateCounterClockwise" : {"input":"j","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateClockwise" : {"input":"k","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateReverse" : {"input":"l","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"rotateForwards" : {"input":"m","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"disappear" : {"letter":"n","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 }
 last_key_pressed = ""
 curr_key_pressed = ""
-
+mouse = Controller()
 def main():
     myPath = "" 
     with open('myPathInfo.txt', 'r') as file:
@@ -58,15 +60,22 @@ def pollInput(_line : str):
         return
     matches = re.findall(pattern,_line)
     thoughtToKeyPress(matches[0][0])
+    thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
     
+
+def thoughtToMouseMovement(_command, _thinkingIntensity):
+    if command_to_key.__contains__(_command):
+        if command_to_key[_command]["mouseControl"]:
+            mouse.move(command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
+                       ,command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity)
+
 def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
     if command_to_key.__contains__(_command):
         last_key_pressed = curr_key_pressed        
-        curr_key_pressed = command_to_key[_command]
+        curr_key_pressed = command_to_key[_command]["input"]
         #keyboard.press_and_release(command_to_key[_command])
-
 
 if __name__ == "__main__":
     main()
