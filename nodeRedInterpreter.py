@@ -31,8 +31,10 @@ def main():
     global last_key_pressed
     while(True):
         if last_key_pressed != curr_key_pressed:
-            keyboard.press(curr_key_pressed)
-            keyboard.release(last_key_pressed)
+            if curr_key_pressed != "":
+                keyboard.press(curr_key_pressed)
+            if last_key_pressed != "":
+                keyboard.release(last_key_pressed)
             
     
 
