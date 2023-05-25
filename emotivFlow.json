@@ -24,8 +24,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
-        "y": 160,
+        "x": 870,
+        "y": 200,
         "wires": [
             [
                 "5f4fa135b864e08d"
@@ -49,7 +49,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
+        "x": 870,
         "y": 280,
         "wires": [
             [
@@ -76,12 +76,24 @@
         "z": "43d30511a4e8ba99",
         "name": "Profile Name",
         "profileName": "domb",
-        "x": 280,
+        "x": 240,
         "y": 220,
         "wires": [
             [
                 "3de480bf.41b19",
-                "98aa2d1e.0320c"
+                "98aa2d1e.0320c",
+                "658d4c98cfc4d5a8",
+                "822ae01dc9d1ddc9",
+                "6aab2370a5d1e7d4",
+                "6c11cf634779efc9",
+                "c53b63ca4594fc89",
+                "2e36c8375be3f026",
+                "19f2e45d2c6b8910",
+                "7f815205cb47aee0",
+                "1f6d43d2f87ca875",
+                "5935d78ff026d009",
+                "79b3fd21f393b5bc",
+                "1330692373ffb691"
             ]
         ]
     },
@@ -93,7 +105,7 @@
         "actionName": "push",
         "mcSen": "10",
         "x": 550,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "29334321.88b60c"
@@ -126,8 +138,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1320,
-        "y": 100,
+        "x": 1280,
+        "y": 140,
         "wires": [
             [
                 "a790c1ce4b85e704"
@@ -151,8 +163,8 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 70,
-        "y": 500,
+        "x": 150,
+        "y": 360,
         "wires": [
             [
                 "7b66f64cddfb350d"
@@ -176,8 +188,8 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 70,
-        "y": 560,
+        "x": 150,
+        "y": 440,
         "wires": [
             [
                 "e86374b5f24ef6a0"
@@ -195,8 +207,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"Enabled\", true)",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 500,
+        "x": 300,
+        "y": 360,
         "wires": [
             []
         ]
@@ -212,8 +224,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"Enabled\", true)",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 560,
+        "x": 300,
+        "y": 440,
         "wires": [
             []
         ]
@@ -230,7 +242,7 @@
         "finalize": "",
         "libs": [],
         "x": 1060,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "36684e8a540cdc3a"
@@ -269,8 +281,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1730,
-        "y": 100,
+        "x": 1690,
+        "y": 140,
         "wires": []
     },
     {
@@ -290,7 +302,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
+        "x": 870,
         "y": 380,
         "wires": [
             [
@@ -315,7 +327,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
+        "x": 870,
         "y": 440,
         "wires": [
             [
@@ -408,7 +420,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 520,
         "wires": [
             [
@@ -433,7 +445,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 580,
         "wires": [
             [
@@ -448,7 +460,7 @@
         "name": "Mental Commands",
         "actionName": "left",
         "mcSen": "10",
-        "x": 570,
+        "x": 550,
         "y": 520,
         "wires": [
             [
@@ -463,7 +475,7 @@
         "name": "Mental Commands",
         "actionName": "right",
         "mcSen": "10",
-        "x": 570,
+        "x": 550,
         "y": 580,
         "wires": [
             [
@@ -526,7 +538,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 660,
         "wires": [
             [
@@ -551,7 +563,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 720,
         "wires": [
             [
@@ -566,7 +578,7 @@
         "name": "Mental Commands",
         "actionName": "rotateRight",
         "mcSen": "10",
-        "x": 590,
+        "x": 570,
         "y": 660,
         "wires": [
             [
@@ -581,7 +593,7 @@
         "name": "Mental Commands",
         "actionName": "rotateLeft",
         "mcSen": "10",
-        "x": 590,
+        "x": 570,
         "y": 720,
         "wires": [
             [
@@ -644,7 +656,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 800,
         "wires": [
             [
@@ -669,7 +681,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 860,
         "wires": [
             [
@@ -684,7 +696,7 @@
         "name": "Mental Commands",
         "actionName": "rotateCounterClockwise",
         "mcSen": "10",
-        "x": 530,
+        "x": 610,
         "y": 800,
         "wires": [
             [
@@ -699,7 +711,7 @@
         "name": "Mental Commands",
         "actionName": "rotateClockwise",
         "mcSen": "10",
-        "x": 550,
+        "x": 590,
         "y": 860,
         "wires": [
             [
@@ -762,7 +774,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 920,
         "wires": [
             [
@@ -787,7 +799,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 980,
         "wires": [
             [
@@ -802,7 +814,7 @@
         "name": "Mental Commands",
         "actionName": "rotateReverse",
         "mcSen": "10",
-        "x": 560,
+        "x": 580,
         "y": 920,
         "wires": [
             [
@@ -817,7 +829,7 @@
         "name": "Mental Commands",
         "actionName": "rotateForwards",
         "mcSen": "10",
-        "x": 560,
+        "x": 580,
         "y": 980,
         "wires": [
             [
@@ -880,7 +892,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 810,
+        "x": 870,
         "y": 1040,
         "wires": [
             [
@@ -939,8 +951,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
-        "y": 100,
+        "x": 870,
+        "y": 140,
         "wires": [
             [
                 "75940a7959b0bddf"
@@ -955,7 +967,7 @@
         "actionName": "neutral",
         "mcSen": "10",
         "x": 560,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "7a8c836bb7e6c480"
@@ -974,7 +986,7 @@
         "finalize": "",
         "libs": [],
         "x": 1060,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "36684e8a540cdc3a"
@@ -1027,8 +1039,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 1530,
-        "y": 100,
+        "x": 1490,
+        "y": 140,
         "wires": [
             [
                 "0bf0848bbc4fe879"
