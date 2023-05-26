@@ -1,6 +1,7 @@
 import keyboard
 import time
 import re
+import asyncio
 from pynput.mouse import Button, Controller
 
 class constants:
@@ -79,15 +80,24 @@ def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
     if command_to_key.__contains__(_command):
-        if last_key_pressed != curr_key_pressed:
-            if curr_key_pressed != "":
-                keyboard.press(curr_key_pressed)
-            if last_key_pressed != "":
-                keyboard.release(last_key_pressed)
-        last_key_pressed = curr_key_pressed        
-        curr_key_pressed = command_to_key[_command]["input"]
+        print("pressing key " + command_to_key[_command]["input"])
+        press_and_release_time(command_to_key[_command]["input"],constants.pollRate)
+        pass
+        # if last_key_pressed != curr_key_pressed:
+        #     if curr_key_pressed != "":
+        #         keyboard.press(curr_key_pressed)
+        #     if last_key_pressed != "":
+        #         keyboard.release(last_key_pressed)
+        # last_key_pressed = curr_key_pressed        
+        # curr_key_pressed = command_to_key[_command]["input"]
 
     #keyboard.press_and_release(command_to_key[_command])
+
+async def press_and_release_time(key,_holdTime):
+    keyboard.press(key)
+    await asyncio.sleep(_holdTime)
+    keyboard.release(key)
+
 
 if __name__ == "__main__":
     main()
