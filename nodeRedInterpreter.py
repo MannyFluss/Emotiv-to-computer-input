@@ -11,7 +11,7 @@ class constants:
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 
 command_to_key = {
-"neutral" : {"input":"","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"neutral" : {"input":"a","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "push" : {"input":"b","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0)},
@@ -36,9 +36,6 @@ def main():
     global curr_key_pressed
     global last_key_pressed
     while(True):
-
-        
-
         if keyboard.is_pressed(constants.killSwitch):
             break
         with open(myPath, "r", encoding='utf-16') as f:
@@ -81,7 +78,7 @@ def thoughtToKeyPress(_command):
     global last_key_pressed
     if command_to_key.__contains__(_command):
         print("pressing key " + command_to_key[_command]["input"])
-        press_and_release_time(command_to_key[_command]["input"],constants.pollRate)
+        asyncio.run(press_and_release_time(command_to_key[_command]["input"],constants.pollRate))
         pass
         # if last_key_pressed != curr_key_pressed:
         #     if curr_key_pressed != "":
@@ -94,6 +91,7 @@ def thoughtToKeyPress(_command):
     #keyboard.press_and_release(command_to_key[_command])
 
 async def press_and_release_time(key,_holdTime):
+    print(key)
     keyboard.press(key)
     await asyncio.sleep(_holdTime)
     keyboard.release(key)
