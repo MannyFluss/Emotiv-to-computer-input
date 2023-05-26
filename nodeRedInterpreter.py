@@ -73,8 +73,9 @@ def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
     if command_to_key.__contains__(_command):
-        last_key_pressed = curr_key_pressed        
-        curr_key_pressed = command_to_key[_command]["input"]
+        if not command_to_key[_command]["mouseControl"]:
+            last_key_pressed = curr_key_pressed        
+            curr_key_pressed = command_to_key[_command]["input"]
         #keyboard.press_and_release(command_to_key[_command])
 
 if __name__ == "__main__":
