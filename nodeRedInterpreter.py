@@ -52,6 +52,9 @@ def main():
             pollInput(lines[-1])
         time.sleep(constants.pollRate)
 
+
+
+
 def pollInput(_line : str):
     pattern = r'\[info\] \[debug:debug \d+\] (\w+),(\d+)'
     validLine = re.search(pattern,_line)
@@ -60,6 +63,7 @@ def pollInput(_line : str):
         return
     matches = re.findall(pattern,_line)
     mouseControl = command_to_key[matches[0][0]]["mouseControl"]
+    print("mouse control = " +str(mouseControl))
     if mouseControl == True:
         thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
     else:
