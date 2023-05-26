@@ -59,24 +59,31 @@ def pollInput(_line : str):
         print("invalid line")
         return
     matches = re.findall(pattern,_line)
-    thoughtToKeyPress(matches[0][0])
-    thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
+    mouseControl = command_to_key[matches[0][0]]["mouseControl"]
+    if mouseControl == True:
+        thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
+    else:
+        thoughtToKeyPress(matches[0][0])
     
 
 def thoughtToMouseMovement(_command, _thinkingIntensity):
+    print("debug statement 1")
     if command_to_key.__contains__(_command):
-        if command_to_key[_command]["mouseControl"]:
-            mouse.move(command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
-                       ,command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity)
+        print("debug statement 2")
+        
+        mouse.move(command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
+                   ,command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity)
 
 def thoughtToKeyPress(_command):
+    print("debug statement 3")
     global curr_key_pressed
     global last_key_pressed
     if command_to_key.__contains__(_command):
-        if not command_to_key[_command]["mouseControl"]:
-            last_key_pressed = curr_key_pressed        
-            curr_key_pressed = command_to_key[_command]["input"]
-        #keyboard.press_and_release(command_to_key[_command])
+        print("debug statement 4")
+
+        last_key_pressed = curr_key_pressed        
+        curr_key_pressed = command_to_key[_command]["input"]
+    #keyboard.press_and_release(command_to_key[_command])
 
 if __name__ == "__main__":
     main()
