@@ -4,11 +4,11 @@ import re
 from pynput.mouse import Button, Controller
 
 class constants:
-    
     pollRate = .1
     killSwitch = '/'
     mouseSensitivityMult = 1
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
+
 command_to_key = {
 "neutral" : {"input":"","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "push" : {"input":"b","mouseControl":False,"mouseDxDy":(1.0,1.0)},
@@ -44,7 +44,7 @@ def main():
 
         if keyboard.is_pressed(constants.killSwitch):
             break
-        with open(constants.myPath, "r", encoding='utf-16') as f:
+        with open(myPath, "r", encoding='utf-16') as f:
             lines = f.readlines()
             if (lines == []):
                 time.sleep(constants.pollRate)
