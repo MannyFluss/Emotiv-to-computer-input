@@ -39,6 +39,7 @@ def main():
     global last_key_pressed
     global last_input_detected
     global enabled
+
     while(True):
         if keyboard.is_pressed(constants.killSwitch):
             break
@@ -80,7 +81,7 @@ def thoughtToMouseMovement(_command, _thinkingIntensity):
     if command_to_key.__contains__(_command):
         movX = command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
         movY = command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity
-        pydirectinput.moveRel(movX,movY)
+        pydirectinput.moveRel(int(movX),int(movY))
 
 def thoughtToKeyPress(_command):
     global curr_key_pressed
