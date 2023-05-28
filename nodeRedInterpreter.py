@@ -8,6 +8,7 @@ class constants:
     pollRate = .1
     killSwitch = '/'
     mouseSensitivityMult = 1
+    toggleSwitch = '.'
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 
 command_to_key = {
@@ -28,6 +29,7 @@ command_to_key = {
 }
 last_key_pressed = ""
 curr_key_pressed = ""
+last_input_detected = ""
 mouse = Controller()
 def main():
     myPath = "" 
@@ -38,11 +40,17 @@ def main():
     while(True):
         if keyboard.is_pressed(constants.killSwitch):
             break
+        if keyboard.is_pressed(constants.toggleSwitch):
+            time.sleep(constants.pollRate)
+            continue
+
         with open(myPath, "r", encoding='utf-16') as f:
             lines = f.readlines()
-            if (lines == []):
+            if (lines == []) or lines[-1] == last_input_detected:
                 time.sleep(constants.pollRate)
-                continue        
+                continue
+            #no new input has been detected:
+
             pollInput(lines[-1])
         time.sleep(constants.pollRate)
 
@@ -50,14 +58,15 @@ def main():
 
 
 def pollInput(_line : str):
+    print(_line)
     pattern = r'\[info\] \[debug:debug \d+\] (\w+),(\d+)'
     validLine = re.search(pattern,_line)
     if not validLine:
-        print("invalid line")
+        #print("invalid line")
         return
     matches = re.findall(pattern,_line)
     mouseControl = command_to_key[matches[0][0]]["mouseControl"]
-    print("mouse control = " +str(mouseControl))
+    #print("mouse control = " +str(mouseControl))
     if mouseControl == True:
         thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
     else:
@@ -65,19 +74,16 @@ def pollInput(_line : str):
     
 
 def thoughtToMouseMovement(_command, _thinkingIntensity):
-    print("debug statement 1")
     if command_to_key.__contains__(_command):
-        print("debug statement 2")
         
         mouse.move(command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
                    ,command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity)
 
 def thoughtToKeyPress(_command):
-    print("debug statement 3")
     global curr_key_pressed
     global last_key_pressed
     if command_to_key.__contains__(_command):
-        print("pressing key " + command_to_key[_command]["input"])
+        #print("pressing key " + command_to_key[_command]["input"])
         asyncio.run(press_and_release_time(command_to_key[_command]["input"],constants.pollRate))
         pass
         # if last_key_pressed != curr_key_pressed:
