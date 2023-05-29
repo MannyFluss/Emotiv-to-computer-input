@@ -2,17 +2,18 @@ import keyboard
 import time
 import re
 import asyncio
-import pydirectinput
+import pyautogui
 
 class constants:
     pollRate = .1
     killSwitch = '/'
     mouseSensitivityMult = 1
     toggleSwitch = '='
+    interpCount = 16
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 
 command_to_key = {
-"neutral" : {"input":"a","mouseControl":True,"mouseDxDy":(1.0,1.0)},
+"neutral" : {"input":"a","mouseControl":True,"mouseDxDy":(20.0,20.0)},
 "push" : {"input":"b","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0)},
@@ -49,7 +50,7 @@ def main():
         if enabled == False:
             time.sleep(constants.pollRate)
             continue
-        with open(myPath, "r", encoding='utf-16') as f:
+        with open(myPath, "r", encoding='utf-8') as f:
             lines = f.readlines()
             #no new input has been detected:
             if (lines == []) or lines[-1] == last_input_detected:
@@ -81,7 +82,26 @@ def thoughtToMouseMovement(_command, _thinkingIntensity):
     if command_to_key.__contains__(_command):
         movX = command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
         movY = command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity
-        pydirectinput.moveRel(int(movX),int(movY))
+        
+        movX = int(command_to_key[_command]["mouseDxDy"][0])
+        movY = int(command_to_key[_command]["mouseDxDy"][1])
+        #smoothly interpolate over pollRate amount of time, interpolationcount    
+
+        pyautogui.moveRel(int(movX),int(movY),constants.pollRate-.001)
+
+        #smoothlyInterpolateMouseMovement(movX,movY,constants.pollRate,constants.interpCount)
+
+
+
+# def smoothlyInterpolateMouseMovement(Dx,Dy,totalTime,interpCount):
+#      moveX = int(Dx/interpCount)
+#      moveY = int(Dy/interpCount)
+#      timeIntervals = totalTime/interpCount
+#      print(timeIntervals)
+#      for i in range(0,interpCount):
+#         print(i)
+#         pyautogui.moveRel(int(moveX),int(moveY),i/timeIntervals)
+
 
 def thoughtToKeyPress(_command):
     global curr_key_pressed
