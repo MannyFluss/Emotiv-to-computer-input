@@ -26,5 +26,5 @@ instructions for use:
     -you can edit the script in order to get different functionality from different commands, or change the hotkey for the killswitch
 
  Extra:
-
+    note* this started as a node-red program that transfered to a py project, the data stream can be replicated here: https://github.com/Emotiv/cortex-v2-example/tree/master/python
     technically this program is doomed to fail after the output.txt gets too large, to prevent this delete the output.txt when you arent using the program
