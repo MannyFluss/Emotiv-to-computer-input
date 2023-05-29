@@ -80,6 +80,7 @@ def pollInput(_line : str):
 
 def thoughtToMouseMovement(_command, _thinkingIntensity):
     if command_to_key.__contains__(_command):
+        
         movX = command_to_key[_command]["mouseDxDy"][0] * constants.mouseSensitivityMult * _thinkingIntensity
         movY = command_to_key[_command]["mouseDxDy"][1] * constants.mouseSensitivityMult * _thinkingIntensity
         
@@ -87,7 +88,7 @@ def thoughtToMouseMovement(_command, _thinkingIntensity):
         movY = int(command_to_key[_command]["mouseDxDy"][1])
         #smoothly interpolate over pollRate amount of time, interpolationcount    
 
-        pyautogui.moveRel(int(movX),int(movY),constants.pollRate-.001)
+        pyautogui.moveRel(int(movX),int(movY),constants.pollRate-.001,tween=pyautogui.linear)
 
         #smoothlyInterpolateMouseMovement(movX,movY,constants.pollRate,constants.interpCount)
 
