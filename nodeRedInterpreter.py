@@ -14,7 +14,7 @@ class constants:
 
 command_to_key = {
 "neutral" : {"input":"a","mouseControl":True,"mouseDxDy":(20.0,20.0)},
-"push" : {"input":"b","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"push" : {"input":"b","mouseControl":True,"mouseDxDy":(100.0,100.0)},
 "pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0)},
 "drop" : {"input":"e","mouseControl":False,"mouseDxDy":(1.0,1.0)},
