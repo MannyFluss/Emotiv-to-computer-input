@@ -109,8 +109,7 @@ def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
 
-    if curr_key_pressed != last_key_pressed:
-        release_held_key()
+
     if command_to_key.__contains__(_command):
 
         if command_to_key[_command]["held"]:
@@ -129,6 +128,9 @@ async def press_and_release_time(key,_holdTime):
 held_key = ''
 def press_and_hold(key):
     global held_key
+    #check if there is already a held key
+    if held_key != '':
+        release_held_key()
     held_key = key
     keyboard.press(held_key)
 
