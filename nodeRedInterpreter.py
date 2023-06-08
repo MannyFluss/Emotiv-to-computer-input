@@ -13,24 +13,30 @@ class constants:
     #myPathAlt = "C:/Users/manny/AppData/Roaming/npm/node-red"
 
 command_to_key = {
-"neutral" : {"input":"a","mouseControl":True,"mouseDxDy":(20.0,20.0)},
-"push" : {"input":"b","mouseControl":True,"mouseDxDy":(100.0,100.0)},
-"pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"drop" : {"input":"e","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"left" : {"input":"f","mouseControl":False,"mouseDxDy":(1.0,1.0)}, 
-"right" : {"input":"g","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateRight" : {"input":"h","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateLeft" : {"input":"i","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateCounterClockwise" : {"input":"j","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateClockwise" : {"input":"k","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateReverse" : {"input":"l","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"rotateForwards" : {"input":"m","mouseControl":False,"mouseDxDy":(1.0,1.0)},
-"disappear" : {"letter":"n","mouseControl":False,"mouseDxDy":(1.0,1.0)},
+"neutral" : {"input":"a","mouseControl":True,"mouseDxDy":(20.0,20.0),"held":False},
+"push" : {"input":"b","mouseControl":True,"mouseDxDy":(100.0,100.0),"held":False},
+"pull" : {"input":"c","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"lift" : {"input":"d","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"drop" : {"input":"e","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"left" : {"input":"f","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False}, 
+"right" : {"input":"g","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateRight" : {"input":"h","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateLeft" : {"input":"i","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateCounterClockwise" : {"input":"j","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateClockwise" : {"input":"k","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateReverse" : {"input":"l","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"rotateForwards" : {"input":"m","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
+"disappear" : {"letter":"n","mouseControl":False,"mouseDxDy":(1.0,1.0),"held":False},
 }
+
+
+#make it so that keys can be held and pressed rather than just repeatedly clicked
+
 last_key_pressed = ""
 curr_key_pressed = ""
 last_input_detected = ""
+
+
 enabled = True
 def main():
     myPath = "" 
@@ -55,6 +61,8 @@ def main():
             #no new input has been detected:
             if (lines == []) or lines[-1] == last_input_detected:
                 time.sleep(constants.pollRate)
+                #this means no new inputs, release key press
+                release_held_key()
                 continue
             last_input_detected = lines[-1]
             pollInput(lines[-1])
@@ -71,6 +79,7 @@ def pollInput(_line : str):
         #print("invalid line")
         return
     matches = re.findall(pattern,_line)
+    print(matches)
     mouseControl = command_to_key[matches[0][0]]["mouseControl"]
     if mouseControl == True:
         thoughtToMouseMovement(matches[0][0],int(matches[0][1]))
@@ -94,21 +103,20 @@ def thoughtToMouseMovement(_command, _thinkingIntensity):
 
 
 
-# def smoothlyInterpolateMouseMovement(Dx,Dy,totalTime,interpCount):
-#      moveX = int(Dx/interpCount)
-#      moveY = int(Dy/interpCount)
-#      timeIntervals = totalTime/interpCount
-#      print(timeIntervals)
-#      for i in range(0,interpCount):
-#         print(i)
-#         pyautogui.moveRel(int(moveX),int(moveY),i/timeIntervals)
 
 
 def thoughtToKeyPress(_command):
     global curr_key_pressed
     global last_key_pressed
+
+    if curr_key_pressed != last_key_pressed:
+        release_held_key()
     if command_to_key.__contains__(_command):
-        asyncio.run(press_and_release_time(command_to_key[_command]["input"],constants.pollRate))
+
+        if command_to_key[_command]["held"]:
+            press_and_hold(command_to_key[_command]["input"])
+        else:
+            asyncio.run(press_and_release_time(command_to_key[_command]["input"],constants.pollRate))
         pass
 
 async def press_and_release_time(key,_holdTime):
@@ -116,6 +124,20 @@ async def press_and_release_time(key,_holdTime):
     keyboard.press(key)
     await asyncio.sleep(_holdTime)
     keyboard.release(key)
+
+
+held_key = ''
+def press_and_hold(key):
+    global held_key
+    held_key = key
+    keyboard.press(held_key)
+
+def release_held_key():
+    global held_key
+    if held_key == '':
+        return
+    keyboard.release(held_key)
+    held_key = ''
 
 
 if __name__ == "__main__":
