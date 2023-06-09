@@ -56,7 +56,7 @@ def main():
         if enabled == False:
             time.sleep(constants.pollRate)
             continue
-        with open(myPath, "r", encoding='utf-8') as f:
+        with open(myPath, "r", encoding='utf-16') as f:
             lines = f.readlines()
             #no new input has been detected:
             if (lines == []) or lines[-1] == last_input_detected:
