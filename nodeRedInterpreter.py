@@ -130,7 +130,9 @@ def press_and_hold(key):
     global held_key
     #check if there is already a held key
     if held_key != '':
-        if held_key != key:
+        if held_key == key:
+            return
+        else:
             release_held_key()
     held_key = key
     keyboard.press(held_key)
