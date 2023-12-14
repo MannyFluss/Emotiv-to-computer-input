@@ -4,9 +4,9 @@
 This program interprets emotiv-bci commands from the node-red library and converts them into clicks and keyboard presses.
 
 ## Requirements
-- Python3 [^1^][1]
-- keyboard [^2^][2]
-- pydirectinput [^3^][3]
+- Python3
+- keyboard
+- pydirectinput 
 - Node-RED
 - Emotiv Launcher and its Node-RED components
 
