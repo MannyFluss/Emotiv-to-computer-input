@@ -1,5 +1,3 @@
-# Manny Fluss
-
 ## Description
 This program interprets emotiv-bci commands from the node-red library and converts them into clicks and keyboard presses.
 
